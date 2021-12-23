@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {  useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 
-// import { FixedSizeList as List } from 'react-window';
+import { FixedSizeList as List } from 'react-window';
 
 /* const getSuperhero = async  () => {
   try {
@@ -16,8 +16,9 @@ import { connect } from "react-redux";
 getSuperhero(); */
 
 
-const Lista = (/* { index, style } */{state}) => {
-  // const [value, setValue] = useState();
+const Row = ({ index, style, state }) => {
+  
+  
   const dispatch = useDispatch();
   useEffect(()=> {
     const getSuperhero = async  () => {
@@ -26,8 +27,6 @@ const Lista = (/* { index, style } */{state}) => {
           const data = await response.json();
           console.log(data);
           dispatch({type: 'ADD_DATA', value:data});
-          // setValue(data);
-      
       } catch (error) {
         console.error(error);
       }
@@ -37,24 +36,12 @@ const Lista = (/* { index, style } */{state}) => {
     console.log('En lista:', state);
   return (
 
-    <div /* style={style} */>{state.data.results && state.data.results.results.map((e, i)=> {
-      return <div key={i}>{e.name}</div>
-    })}  {/* {index} */}</div>
+    <div style={style}>{state.data.results.results[index] && state.data.results.results[index].name}</div>
   
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    state: state
-  };
-};
-
-const ListaCon = connect(mapStateToProps)(Lista);
-
- 
-
-/* const Lista = () => (
+const Lista = () => (
 
   <List
 
@@ -68,13 +55,21 @@ const ListaCon = connect(mapStateToProps)(Lista);
 
   >
 
-    {Row}
+    {RowCon}
 
   </List>
 
-); */
+);
+
+const mapStateToProps = state => {
+  return {
+    state: state
+  };
+};
 
 
+// const ListaCon = connect(mapStateToProps)(Lista);
+const RowCon = connect(mapStateToProps)(Row);
    
 
-export default ListaCon
+export default Lista
