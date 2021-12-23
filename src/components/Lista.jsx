@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { FixedSizeList as List } from 'react-window';
+import {  useDispatch } from 'react-redux';
+import { connect } from "react-redux";
 
-const getSuperhero = async  () => {
+// import { FixedSizeList as List } from 'react-window';
+
+/* const getSuperhero = async  () => {
   try {
       const response = await fetch(`http://localhost:3000/api/4697866216927914/search/a`, {mode:'cors'});
       const data = await response.json();
@@ -10,35 +13,48 @@ const getSuperhero = async  () => {
     console.error(error);
   }
 }
-getSuperhero();
+getSuperhero(); */
 
-const Row = ({ index, style }) => {
 
-  /* const [value, setValue] = useState();
+const Lista = (/* { index, style } */{state}) => {
+  // const [value, setValue] = useState();
+  const dispatch = useDispatch();
   useEffect(()=> {
     const getSuperhero = async  () => {
       try {
-          const response = await fetch(`http://localhost:3000/api/4697866216927914/${index}`, {mode:'cors'});
+          const response = await fetch(`http://localhost:3000/api/4697866216927914/search/a`, {mode:'cors'});
           const data = await response.json();
-          setValue(data);
+          console.log(data);
+          dispatch({type: 'ADD_DATA', value:data});
+          // setValue(data);
       
       } catch (error) {
         console.error(error);
       }
     }
     getSuperhero();
-  }, []); */
-    
+  }, []);
+    console.log('En lista:', state);
   return (
 
-    <div style={style}>superhero {index}</div>
+    <div /* style={style} */>{state.data.results && state.data.results.results.map((e, i)=> {
+      return <div key={i}>{e.name}</div>
+    })}  {/* {index} */}</div>
   
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    state: state
+  };
+};
+
+const ListaCon = connect(mapStateToProps)(Lista);
+
  
 
-const Lista = () => (
+/* const Lista = () => (
 
   <List
 
@@ -56,9 +72,9 @@ const Lista = () => (
 
   </List>
 
-);
+); */
 
 
    
 
-export default Lista
+export default ListaCon

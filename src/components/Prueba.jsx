@@ -2,14 +2,15 @@ import {  useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 
 
-const Prueba = (props) => {
+const Prueba = ({state}) => {
 
     const dispatch = useDispatch();  
-    console.log('Props:', props)
+    console.log('Props:', state)
+    // const hero = props.state.data.results.results[1];
       return (
           <div> 
               <p>
-                  {props.state.data.results[0].name}
+                  {state.data.results && state.data.results.results[1].name}
               </p>
               <button onClick={() => dispatch({type:'PUT_DATA'})}>
                   Start
