@@ -3,11 +3,12 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import PruebaCon from './components/Prueba';
 import './App.css';
 import Lista from './components/Lista';
-import NavBarCon from './components/navbar';
+import NavBar from './components/navbar';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { connect } from "react-redux";
 
-function App() {
+function AppNotCon({state}) {
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,15 +26,21 @@ function App() {
 
   return (
     <div className="app-container">
-      <NavBarCon/>
-      {/* <PruebaCon/> */}
+      <NavBar/>
         <div className="list-container">
           <AutoSizer>
-            {Lista}
+            {Lista(state.data.results.results.length)}
           </AutoSizer>
         </div>
     </div>
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    state: state
+  };
+};
+
+const App = connect(mapStateToProps)(AppNotCon);
 export default App;

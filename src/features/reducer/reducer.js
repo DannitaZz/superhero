@@ -12,37 +12,31 @@ const initialState = {
         powerstats: { speed: "30", intelligence: "40", power: "50", combat: "20", strenght: "60", durability: "80" } }] }
 
     },
+    initialData: {},
     filters: '',
     orders: '',
 };
 
-initialState.init_data = initialState.data
-
 const search_name = (query, data) => (
-    data.filter(item=>(
+    data.slice().filter(item=>(
         item.name.toLowerCase().includes(query.toLowerCase())
         )
     )
 );
 
-export default function appReducer(state = initialState, action) {
+export default function appReducer(state = {...initialState}, action) {
 
     switch (action.type) {
-        case 'PUT_DATA': {
-            const new_state = { ...state }
-            new_state.data.results.results[1].name = 'Superhéroe SÍ disponible'
-            return new_state;
-        }
         case 'ADD_DATA': {
             const new_state = { ...state }
-            new_state.data.results = action.value;
-            new_state.init_data.results = action.value;
+            new_state.data.results = {...action.value}
+            new_state.initialData.results = {...action.value}
             return new_state;
         }
         case 'FILTER_DATA_GENDER': {
             const new_state = { ...state }
             new_state.filters= action.item;
-            const filteredData = new_state.data.results.results.filter((e) => new_state.filters === e.appearance.gender);
+            const filteredData = new_state.initialData.results.results.slice().filter((e) => new_state.filters === e.appearance.gender);
             new_state.data.results.results = filteredData;
             
             return new_state;
@@ -50,7 +44,7 @@ export default function appReducer(state = initialState, action) {
         case 'FILTER_DATA_RACE': {
             const new_state = { ...state }
             new_state.filters = action.item;
-            const filteredData = new_state.data.results.results.filter((e) => new_state.filters === e.appearance.race);
+            const filteredData = new_state.initialData.results.results.slice().filter((e) => new_state.filters === e.appearance.race);
             new_state.data.results.results = filteredData;
             
             return new_state;
@@ -58,7 +52,7 @@ export default function appReducer(state = initialState, action) {
         case 'FILTER_DATA_EYE': {
             const new_state = { ...state }
             new_state.filters = action.item;
-            const filteredData = new_state.data.results.results.filter((e) => new_state.filters === e.appearance["eye-color"]);
+            const filteredData = new_state.initialData.results.results.slice().filter((e) => new_state.filters === e.appearance["eye-color"]);
             new_state.data.results.results = filteredData;
             
             return new_state;
@@ -66,7 +60,7 @@ export default function appReducer(state = initialState, action) {
         case 'FILTER_DATA_HAIR': {
             const new_state = { ...state }
             new_state.filters = action.item;
-            const filteredData = new_state.data.results.results.filter((e) => new_state.filters === e.appearance["hair-color"]);
+            const filteredData = new_state.initialData.results.results.slice().filter((e) => new_state.filters === e.appearance["hair-color"]);
             new_state.data.results.results = filteredData;
             
             return new_state;
@@ -89,9 +83,8 @@ export default function appReducer(state = initialState, action) {
         }
         case 'SEARCH': {
             const new_state = { ...state }
-            let search_data = search_name(action.value, new_state.data.results.results)
+            let search_data = search_name(action.value, new_state.initialData.results.results)
             new_state.data.results.results = search_data;
-            
             return new_state;
         }
         default:

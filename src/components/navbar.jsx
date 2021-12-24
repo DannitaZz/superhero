@@ -2,11 +2,8 @@ import { connect } from "react-redux";
 import FilterCon from './filter';
 import OrderCon from './order';
 import SearchCon from "./search";
-import './navbar.css'
 
-const NavBar = ({ state }) => {
-
-    // const dispatch = useDispatch();
+const NavBar = () => {
 
     return (
         <div className="container">
@@ -32,13 +29,4 @@ const NavBar = ({ state }) => {
     );
 }
 
-const mapStateToProps = state => {
-    return {
-        state: state
-    };
-};
-
-const NavBarCon = connect(mapStateToProps)(NavBar);
-
-
-export default NavBarCon
+export default NavBar

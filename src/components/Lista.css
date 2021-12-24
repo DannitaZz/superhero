@@ -9,14 +9,12 @@
     height: 100px;
     align-self: center;
     margin-top: 15px;
-    border: solid rgb(134, 36, 36);
+    border: solid #DDAA33;
 }
 
 .card-title{
     text-align: center;
-    /* color:seashell; */
 }
 .card-text{
     text-align: center;
-    /* color:seashell; */
 }
