@@ -1,0 +1,22 @@
+.card{
+    display: flex;
+    border: solid #002333 ;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.card img{
+    width: 100px;
+    height: 100px;
+    align-self: center;
+    margin-top: 15px;
+    border: solid rgb(134, 36, 36);
+}
+
+.card-title{
+    text-align: center;
+    /* color:seashell; */
+}
+.card-text{
+    text-align: center;
+    /* color:seashell; */
+}

@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import FilterCon from './filter';
 import OrderCon from './order';
 import SearchCon from "./search";
+import './navbar.css'
 
 const NavBar = ({ state }) => {
 
@@ -9,7 +10,7 @@ const NavBar = ({ state }) => {
 
     return (
         <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">SuperHeroes</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -18,6 +18,13 @@ const initialState = {
 
 initialState.init_data = initialState.data
 
+const search_name = (query, data) => (
+    data.filter(item=>(
+        item.name.toLowerCase().includes(query.toLowerCase())
+        )
+    )
+);
+
 export default function appReducer(state = initialState, action) {
 
     switch (action.type) {
@@ -78,6 +85,13 @@ export default function appReducer(state = initialState, action) {
                 }
                 return 0;
             });
+            return new_state;
+        }
+        case 'SEARCH': {
+            const new_state = { ...state }
+            let search_data = search_name(action.value, new_state.data.results.results)
+            new_state.data.results.results = search_data;
+            
             return new_state;
         }
         default:

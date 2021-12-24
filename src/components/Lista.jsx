@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 
 import { FixedSizeList as List } from 'react-window';
+import './Lista.css'
 
 const Row = ({ index, style, state }) => {
   return (
 
     <div /* style="width: 18rem;" */>
       <div className="card" style={style}>
-        {/* <img src={state.data.results.results[index].image.url} className="card-img-top" alt="..."></img> */}
+        <img src={ state.data.results.results[index] &&  state.data.results.results[index].image.url} className="card-img-top" alt="..."></img>
           <div className="card-body">
             <h5 className="card-title">{state.data.results.results[index] && state.data.results.results[index].name}</h5>
             {/* <h6 className='card-text'>Appearance</h6>

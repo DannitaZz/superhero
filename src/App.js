@@ -1,5 +1,3 @@
-import bootstrap from 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import PruebaCon from './components/Prueba';
