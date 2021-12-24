@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 const Prueba = ({state}) => {
 
     const dispatch = useDispatch();  
-    console.log('Props:', state)
-    // const hero = props.state.data.results.results[1];
       return (
           <div> 
               <p>

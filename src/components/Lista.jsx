@@ -1,57 +1,39 @@
-import { useEffect, useState } from 'react';
-import {  useDispatch } from 'react-redux';
 import { connect } from "react-redux";
 
 import { FixedSizeList as List } from 'react-window';
 
-/* const getSuperhero = async  () => {
-  try {
-      const response = await fetch(`http://localhost:3000/api/4697866216927914/search/a`, {mode:'cors'});
-      const data = await response.json();
-  
-  } catch (error) {
-    console.error(error);
-  }
-}
-getSuperhero(); */
-
-
 const Row = ({ index, style, state }) => {
-  
-  
-  const dispatch = useDispatch();
-  useEffect(()=> {
-    const getSuperhero = async  () => {
-      try {
-          const response = await fetch(`http://localhost:3000/api/4697866216927914/search/a`, {mode:'cors'});
-          const data = await response.json();
-          console.log(data);
-          dispatch({type: 'ADD_DATA', value:data});
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getSuperhero();
-  }, []);
-    console.log('En lista:', state);
   return (
 
-    <div style={style}>{state.data.results.results[index] && state.data.results.results[index].name}</div>
-  
+    <div /* style="width: 18rem;" */>
+      <div className="card" style={style}>
+        {/* <img src={state.data.results.results[index].image.url} className="card-img-top" alt="..."></img> */}
+          <div className="card-body">
+            <h5 className="card-title">{state.data.results.results[index] && state.data.results.results[index].name}</h5>
+            {/* <h6 className='card-text'>Appearance</h6>
+            <p className="card-text">Gender: {state.data.results.results[index] &&  state.data.results.results[index].appearance.gender}    Race: {state.data.results.results[index] &&  state.data.results.results[index].appearance.race}</p>
+            <p className="card-text">Eye color: {state.data.results.results[index] &&  state.data.results.results[index].appearance["eye-color"]}    Hair color: {state.data.results.results[index] &&  state.data.results.results[index].appearance["hair-color"]}</p>
+            <p className="card-text">Height: {state.data.results.results[index].appearance.height[1]}    Weight: {state.data.results.results[index].appearance.weight[1]}</p> */}
+            <h6 className='card-text'>Power Stats</h6>
+            <p className="card-text">Intelligence: {state.data.results.results[index] &&  state.data.results.results[index].powerstats.intelligence}    Speed: {state.data.results.results[index] &&  state.data.results.results[index].powerstats.speed}    Durability: {state.data.results.results[index] &&  state.data.results.results[index].powerstats.durability}</p>
+            <p className="card-text">Power: {state.data.results.results[index] &&  state.data.results.results[index].powerstats.power}    Combat: {state.data.results.results[index] &&  state.data.results.results[index].powerstats.combat}    Strength: {state.data.results.results[index] &&  state.data.results.results[index].powerstats.strength}</p>
+          </div>
+      </div>
+    </div>
   );
 }
 
-const Lista = () => (
+const Lista = ({ height, width }) => (
 
   <List
 
-    height={150}
+    height={height}
 
     itemCount={730}
 
-    itemSize={35}
+    itemSize={300}
 
-    width={300}
+    width={width}
 
   >
 
@@ -70,6 +52,6 @@ const mapStateToProps = state => {
 
 // const ListaCon = connect(mapStateToProps)(Lista);
 const RowCon = connect(mapStateToProps)(Row);
-   
+
 
 export default Lista
